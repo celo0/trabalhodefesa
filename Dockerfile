@@ -13,7 +13,7 @@ RUN apk update && \
 RUN adduser noob -D
 USER noob
 ENV TZ=America/Sao_Paulo
-#ENV API_KEY=testedockle
+ENV API_KEY=testedockle
 
 EXPOSE 80 443
 

@@ -63,6 +63,6 @@ jobs:
       - name: Assinando a Imagem com Cosign
         run: |
           echo "${{ secrets.COSIGN_PRIVATE_KEY }}" > cosign.key
-          cosign sign --key cosign.key celo0/trabalhodefesa:${{ github.event.release.tag_name }}
+          cosign sign --key cosign.key $DIGEST
 
       

@@ -19,7 +19,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           
       - name: Build Docker Image
-        run: docker build -t cel0/trabalhodefesa:1.0 .
+        run: docker build -t celo0/trabalhodefesa:1.0 .
       
       - name: Run Dockle Scan
         uses: goodwithtech/dockle-action@main

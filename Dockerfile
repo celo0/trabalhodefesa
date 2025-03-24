@@ -1,5 +1,5 @@
-#FROM alpine:3.21.3
-FROM alpine:3.10
+FROM alpine:3.21.3
+#FROM alpine:3.10
 
 RUN apk update && \
     apk add --no-cache \

@@ -29,3 +29,4 @@ jobs:
           exit-code: '1'
           exit-level: 'fatal'
           ignore: 'CIS-DI-0001,DKL-DI-0006,CIS-DI-0005,CIS-DI-0006,CIS-DI-0008'
+          accept-key: 'org.opencontainers.image.version,org.opencontainers.image.ref.name'

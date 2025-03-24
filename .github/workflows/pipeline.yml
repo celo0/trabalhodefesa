@@ -19,5 +19,5 @@ jobs:
         uses: erzz/dockle-action@v1
         with:
           image: trabalhodefesa:1.0
-          args: "--severity FATAL --exclude CIS-DI-0005 --exclude CIS-DI-0006 --exclude CIS-DI-0008"
+          failure-threshold: FATAL
           exit-code: 1  # Fail the pipeline if issues are found

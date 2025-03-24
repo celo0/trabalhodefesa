@@ -1,10 +1,18 @@
-FROM ubuntu:latest
-RUN apt update -y \
-    && apt install -y nginx \
-    && rm -rf /var/lib/apt/lists/*
+#FROM alpine:3.21.3
+FROM alpine:3.10
 
-ENV API_KEY=teste_dockle_api_key
+RUN apk update && \
+    apk add --no-cache \
+    bash \
+    curl \
+    vim \
+    openssl \
+    git \
+    tzdata
 
-EXPOSE 80
-EXPOSE 443
-CMD ["nginx", "-g", "daemon off;"]
+ENV TZ=America/Sao_Paulo
+#ENV API_KEY=testedockle
+
+EXPOSE 80 443
+
+CMD ["sh"]

@@ -1,6 +1,8 @@
 name: Trabalho
 run-name: ${{ github.actor }}  
-on: [push]
+on:
+  release:
+    types: [created]
 jobs:
   TrabalhoParte1:
     runs-on: ubuntu-latest
@@ -13,12 +15,12 @@ jobs:
         uses: docker/setup-buildx-action@v3
           
       - name: Realizando Build da Imagem
-        run: docker build -t celo0/trabalhodefesa:1.0 .
+        run: docker build -t celo0/trabalhodefesa:${{ github.event.release.tag_name }} .
       
       - name: Executando Scan Dockle - CIS Benchmark
         uses: goodwithtech/dockle-action@v0.4.15
         with:
-          image: 'celo0/trabalhodefesa:1.0'
+          image: 'celo0/trabalhodefesa:${{ github.event.release.tag_name }}'
           format: 'list'
           exit-code: '1'
           exit-level: 'fatal'
@@ -28,7 +30,7 @@ jobs:
       - name: Executando Scan Trivy - Vulnerabilidades e segredos
         uses: aquasecurity/trivy-action@0.30.0
         with:
-          image-ref: 'celo0/trabalhodefesa:1.0'
+          image-ref: 'celo0/trabalhodefesa:${{ github.event.release.tag_name }}'
           format: 'table'
           exit-code: '1'
           severity: 'CRITICAL'
@@ -42,6 +44,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Efetuando push para Docker Hub
+        run: |
+          docker push celo0/trabalhodefesa:${{ github.event.release.tag_name }}
+
+      - name: Obtendo Digest da imagem
+        run: |
+          DIGEST=$(docker inspect --format='{{index .RepoDigests 0}}' celo0/trabalhodefesa:${{ github.event.release.tag_name }})
+          echo "Digest: $DIGEST"
+          echo "DIGEST=$DIGEST" >> $GITHUB_ENV
+
       - name: Instalando cosign
         uses: sigstore/cosign-installer@v3.8.1
         
@@ -51,6 +63,6 @@ jobs:
       - name: Assinando a Imagem com Cosign
         run: |
           echo "${{ secrets.COSIGN_PRIVATE_KEY }}" > cosign.key
-          cosign sign --key cosign.key celo0/trabalhodefesa:1.0
+          cosign sign --key cosign.key celo0/trabalhodefesa:${{ github.event.release.tag_name }}
 
       

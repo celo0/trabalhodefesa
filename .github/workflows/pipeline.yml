@@ -13,12 +13,12 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build Docker Image
-        run: docker build -t trabalhodefesa:1.0 .
+        run: docker build -t cel0/trabalhodefesa:1.0 .
       
       - name: Run Dockle Scan
         uses: goodwithtech/dockle-action@main
         with:
-          image: 'trabalhodefesa:1.0'
+          image: 'celo0/trabalhodefesa:1.0'
           format: 'list'
           exit-code: '1'
           exit-level: 'fatal'

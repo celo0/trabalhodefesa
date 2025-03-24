@@ -22,8 +22,8 @@ jobs:
           format: 'list'
           exit-code: '1'
           exit-level: 'fatal'
-          ignore: 'CIS-DI-0001,DKL-DI-0006,CIS-DI-0005,CIS-DI-0006,CIS-DI-0008'
-          accept-key: 'org.opencontainers.image.version,org.opencontainers.image.ref.name'
+         # ignore: 'CIS-DI-0001,DKL-DI-0006,CIS-DI-0005,CIS-DI-0006,CIS-DI-0008'
+          accept-key: 'org.opencontainers.image.version,org.opencontainers.image.ref.name,TZ' # Aceitando as chaves TZ (Timezone do container), org.opencontainers.image.version e org.opencontainers.image.ref.name (Chaves usadas pelo dockle action)
 
       - name: Executando Scan Trivy - Vulnerabilidades e segredos
         uses: aquasecurity/trivy-action@0.30.0

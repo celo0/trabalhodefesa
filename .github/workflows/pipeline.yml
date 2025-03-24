@@ -36,6 +36,12 @@ jobs:
           vuln-type: 'os,library'
           scanners: 'vuln,secret'
 
+      - name: Instalando cosign
+        uses: sigstore/cosign-installer@v3.8.1
+        
+      - name: Testando cosign
+        run: cosign version
+
 
 
       

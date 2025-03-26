@@ -1,0 +1,15 @@
+falco:
+  json_output: true
+  http_output:
+    enabled: true
+
+falcosidekick:
+  enabled: true
+  webui:
+    enabled: true
+  config:
+    talon:
+      address: http://falco-talon:2803
+    telegram:
+      token: "XXXXXXX"
+      chatid: "XXXXXXX"

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shell
+  namespace: teste  # Specifies the namespace
+spec:
+  containers:
+    - name: shell
+      image: ubuntu:latest
+      command: ["sh", "-c", "tail -f /dev/null"]  # Keeps the shell running

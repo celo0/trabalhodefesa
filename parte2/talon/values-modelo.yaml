@@ -1,0 +1,23 @@
+
+config:
+  smtp:
+    format: "html"
+    from: "XXX@XXXX"
+    hostPort: "XXXXXXXX:XXX"
+    password: "XXXXXX"
+    tls: true
+    to: "XXXXXX@XXXXX"
+    user: "XXXXXX@XXXXX"
+  
+  watchRules: true
+
+  rulesOverride: |
+    - rule: Leitura ou Escrita em /tmp/flag
+      description: Foi efetuado uma Leitura ou Escrita no arquivo /tmp/flag
+      match:
+        rules:
+          - Leitura ou Escrita em /tmp/flag
+        output_fields:
+          - k8s.ns.name!=kube-system, k8s.ns.name!=falco
+      actions:
+        - action: Terminate Pod

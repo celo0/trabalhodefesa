@@ -1,14 +1,20 @@
 
 config:
-  smtp:
-    format: "html"
-    from: "XXX@XXXX"
-    hostPort: "XXXXXXXX:XXX"
-    password: "XXXXXX"
-    tls: true
-    to: "XXXXXX@XXXXX"
-    user: "XXXXXX@XXXXX"
-  
+  notifiers:
+    smtp:
+      format: "html"
+      from: "XXXXXX"
+      hostPort: "XXXXXX:XXX"
+      password: "XXXXXX"
+      tls: false
+      to: "XXXXX@XXXXXX"
+      user: "XXXXXX"
+
+
+  defaultNotifiers:
+      - k8sevents
+      - smtp
+    
   watchRules: true
 
   rulesOverride: |
